@@ -92,6 +92,20 @@ async function onConversation() {
   if (lastContext && usingContext.value)
     options = { ...lastContext }
 
+  const messages: any[] = []
+  // 获取传递的上下午消息
+  if (usingContext) {
+    for (const chat of chatStore.getChatByUuid(+uuid)) {
+      if (chat.error)
+        continue
+      const role = chat.inversion ? 'user' : 'assistant'
+      messages.push({ role, content: chat.text })
+    }
+  }
+  else {
+    messages.push({ role: 'user', content: prompt.value })
+  }
+
   addChat(
     +uuid,
     {
@@ -110,8 +124,7 @@ async function onConversation() {
     let lastText = ''
     const fetchChatAPIOnce = async () => {
       await fetchChatAPIProcess<Chat.ConversationResponse>({
-        prompt: message,
-        options,
+        message: messages,
         signal: controller.signal,
         onDownloadProgress: ({ event }) => {
           const xhr = event.target
@@ -212,7 +225,14 @@ async function onRegenerate(index: number) {
 
   controller = new AbortController()
 
+  const messages: any[] = []
   const { requestOptions } = dataSources.value[index]
+  for (const chat of dataSources.value.slice(0, index)) {
+    if (chat.error)
+      continue
+    const role = chat.inversion ? 'user' : 'assistant'
+    messages.push({ role, content: chat.text })
+  }
 
   let message = requestOptions?.prompt ?? ''
 
@@ -241,8 +261,7 @@ async function onRegenerate(index: number) {
     let lastText = ''
     const fetchChatAPIOnce = async () => {
       await fetchChatAPIProcess<Chat.ConversationResponse>({
-        prompt: message,
-        options,
+        message: messages,
         signal: controller.signal,
         onDownloadProgress: ({ event }) => {
           const xhr = event.target

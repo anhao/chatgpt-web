@@ -1,7 +1,6 @@
 <script setup lang='ts'>
 import { computed, ref } from 'vue'
 import { NButton, NInput, NModal, useMessage } from 'naive-ui'
-import { fetchVerify } from '@/api'
 import { useAuthStore } from '@/store'
 import Icon403 from '@/icons/403.vue'
 
@@ -28,7 +27,6 @@ async function handleVerify() {
 
   try {
     loading.value = true
-    await fetchVerify(secretKey)
     authStore.setToken(secretKey)
     ms.success('success')
     window.location.reload()
@@ -57,14 +55,15 @@ function handlePress(event: KeyboardEvent) {
       <div class="space-y-4">
         <header class="space-y-2">
           <h2 class="text-2xl font-bold text-center text-slate-800 dark:text-neutral-200">
-            403
+            请先设置 token 再使用
           </h2>
-          <p class="text-base text-center text-slate-500 dark:text-slate-500">
-            {{ $t('common.unauthorizedTips') }}
-          </p>
+          <div class="text-base text-center text-slate-500 dark:text-slate-500">
+            <div>未绑定 token ，请在 ALAPI 注册登录后获取 token</div>
+            <div>注册登录地址: <a href=" https://admin.alapi.cn" target="_blank"> https://admin.alapi.cn</a></div>
+          </div>
           <Icon403 class="w-[200px] m-auto" />
         </header>
-        <NInput v-model:value="token" type="password" placeholder="" @keypress="handlePress" />
+        <NInput v-model:value="token" type="text" placeholder="请输入 ALAPI 的 token" @keypress="handlePress" />
         <NButton
           block
           type="primary"

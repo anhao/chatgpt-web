@@ -26,6 +26,7 @@ export default {
     failed: '操作失败',
     verify: '验证',
     unauthorizedTips: '未经授权，请先进行验证。',
+    token: 'ALAPI token',
   },
   chat: {
     newChatButton: '新建聊天',
@@ -91,4 +92,5 @@ export default {
     onlineImportWarning: '注意：请检查 JSON 文件来源！',
     downloadError: '请检查网络状态与 JSON 文件有效性',
   },
+
 }

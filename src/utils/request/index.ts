@@ -38,7 +38,7 @@ function http<T = any>(
 
   const failHandler = (error: Response<Error>) => {
     afterRequest?.()
-    throw new Error(error?.message || 'Error')
+    throw new Error(`${error?.message}\n请检查 token 或者对话是否太长了` || 'Error')
   }
 
   beforeRequest?.()
