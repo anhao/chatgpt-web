@@ -64,6 +64,9 @@ function handlePress(event: KeyboardEvent) {
           <Icon403 class="w-[200px] m-auto" />
         </header>
         <NInput v-model:value="token" type="text" placeholder="请输入 ALAPI 的 token" @keypress="handlePress" />
+        <div>
+          <div>token 申请地址: <a href="https://admin.alapi.cn" target="_blank" style="color: red">https://admin.alapi.cn</a></div><div>申请教程：<a style="color: red" href="https://alone88.cn/archives/970.html" target="_blank">https://alone88.cn/archives/970.html</a></div>
+        </div>
         <NButton
           block
           type="primary"
