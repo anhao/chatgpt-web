@@ -73,6 +73,7 @@ export default {
     httpsProxy: 'HTTPS Proxy',
     balance: 'API余额',
     monthlyUsage: '本月使用量',
+    model: '模型',
   },
   store: {
     siderButton: '提示词商店',

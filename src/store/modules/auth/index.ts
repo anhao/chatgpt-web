@@ -1,15 +1,16 @@
 import { defineStore } from 'pinia'
-import { getToken, removeToken, setToken } from './helper'
+import { getModel, getToken, removeToken, setModel, setToken } from './helper'
 import { store } from '@/store'
-
 
 export interface AuthState {
   token: string | undefined
+  model: string
 }
 
 export const useAuthStore = defineStore('auth-store', {
   state: (): AuthState => ({
     token: getToken(),
+    model: getModel(),
   }),
 
   getters: {
@@ -19,6 +20,10 @@ export const useAuthStore = defineStore('auth-store', {
     setToken(token: string) {
       this.token = token
       setToken(token)
+    },
+    setModel(model: string) {
+      this.model = model
+      setModel(model)
     },
 
     removeToken() {

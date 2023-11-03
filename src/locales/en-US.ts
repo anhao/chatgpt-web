@@ -26,8 +26,9 @@ export default {
     failed: 'Failed',
     verify: 'Verify',
     unauthorizedTips: 'Unauthorized, please verify first.',
-		token: 'ALAPI token',
-	},
+    token: 'ALAPI token',
+    model: 'model',
+  },
   chat: {
     newChatButton: 'New Chat',
     placeholder: 'Ask me anything...(Shift + Enter = line break, "/" to trigger prompts)',

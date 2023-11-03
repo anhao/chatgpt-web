@@ -93,7 +93,7 @@ async function onConversation() {
     options = { ...lastContext }
 
   const messages: any[] = []
-  // 获取传递的上下午消息
+  // 获取传递的上下文消息
   if (usingContext) {
     for (const chat of chatStore.getChatByUuid(+uuid)) {
       if (chat.error)
@@ -161,6 +161,7 @@ async function onConversation() {
           }
           catch (error) {
             //
+						console.log(error)
           }
         },
       })

@@ -14,9 +14,12 @@ export function fetchChatAPIProcess<T = any>(
     message: params.message,
     token: authStore.token,
   }
+  let url = 'https://v2.alapi.cn/api/chatgpt/stream'
+  if (authStore.model === 'GPT-4')
+    url = 'https://v2.alapi.cn/api/chatgpt4/stream'
 
   return post<T>({
-    url: 'https://v2.alapi.cn/api/chatgpt/stream',
+    url,
     data,
     signal: params.signal,
     onDownloadProgress: params.onDownloadProgress,

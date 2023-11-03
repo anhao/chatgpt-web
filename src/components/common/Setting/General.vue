@@ -23,6 +23,8 @@ const userInfo = computed(() => userStore.userInfo)
 
 const authInfo = computed(() => authStore.token)
 
+const modelInfo = computed(() => authStore.model)
+
 const avatar = ref(userInfo.value.avatar ?? '')
 
 const name = ref(userInfo.value.name ?? '')
@@ -30,6 +32,7 @@ const name = ref(userInfo.value.name ?? '')
 const description = ref(userInfo.value.description ?? '')
 
 const token = ref(authInfo.value ?? '')
+
 
 const language = computed({
   get() {
@@ -39,6 +42,11 @@ const language = computed({
     appStore.setLanguage(value)
   },
 })
+
+const modelOptions: { label: string;key: string;value: string }[] = [
+  { label: 'GPT-3.5', key: 'GPT-3.5', value: 'GPT-3.5' },
+  { label: 'GPT-4', key: 'GPT-4', value: 'GPT-4' },
+]
 
 const themeOptions: { label: string; key: Theme; icon: string }[] = [
   {
@@ -71,6 +79,11 @@ function updateUserInfo(options: Partial<UserInfo>) {
 
 function updateToken(token: string) {
   authStore.setToken(token)
+  ms.success(t('common.success'))
+}
+
+function updateModel(model: string) {
+  authStore.setModel(model)
   ms.success(t('common.success'))
 }
 
@@ -141,6 +154,17 @@ function handleImportButtonClick(): void {
         <NButton size="tiny" text type="primary" @click="updateToken(token)">
           {{ $t('common.save') }}
         </NButton>
+      </div>
+      <div class="flex items-center space-x-4">
+        <span class="flex-shrink-0 w-[100px]">{{ $t('setting.model') }}</span>
+        <div class="flex flex-wrap items-center gap-4">
+          <NSelect
+            style="width: 140px"
+            :value="modelInfo"
+            :options="modelOptions"
+            @update-value="value => updateModel(value)"
+          />
+        </div>
       </div>
       <div class="flex items-center space-x-4">
         <span class="flex-shrink-0 w-[100px]">{{ $t('setting.avatarLink') }}</span>
