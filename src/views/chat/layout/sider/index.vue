@@ -45,6 +45,10 @@ const mobileSafeArea = computed(() => {
   return {}
 })
 
+const jumpAI = () => {
+  window.location.href = 'https://ai.wpush.cn'
+}
+
 watch(
   isMobile,
   (val) => {
@@ -82,6 +86,11 @@ watch(
         <div class="p-4">
           <NButton block @click="show = true">
             {{ $t('store.siderButton') }}
+          </NButton>
+        </div>
+        <div class="p-4">
+          <NButton type="info" block @click="jumpAI">
+            新AI平台
           </NButton>
         </div>
       </main>

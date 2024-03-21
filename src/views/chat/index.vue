@@ -161,7 +161,7 @@ async function onConversation() {
           }
           catch (error) {
             //
-						console.log(error)
+            console.log(error)
           }
         },
       })
@@ -505,6 +505,11 @@ onUnmounted(() => {
             <div class="flex items-center justify-center mt-4 text-center text-neutral-300">
               <SvgIcon icon="ri:bubble-chart-fill" class="mr-2 text-3xl" />
               <span>Aha~</span>
+            </div>
+            <div class="flex items-center justify-center mt-4 text-center text-neutral-300">
+              <a href="https://ai.wpush.cn">
+                <span style="color:red">推荐使用新AI平台： https://ai.wpush.cn</span>
+              </a>
             </div>
           </template>
           <template v-else>
